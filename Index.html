@@ -10,6 +10,7 @@
     height: 100%;
     font-family: Arial, sans-serif;
     background: url('back.png') center/cover no-repeat;
+    overflow: hidden;
   }
 
   .lock-screen {
@@ -51,7 +52,7 @@
     animation: shake 0.4s;
   }
 
-  .lock-box img {
+  .lock-box img.logo {
     width: 60px;
     height: 60px;
     margin-bottom: 10px;
@@ -95,20 +96,48 @@
     font-size: 14px;
     display: none;
   }
+
+  /* Unlocked screen styling */
+  .unlocked-container {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  .unlocked-container img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 </style>
 </head>
 <body>
 
+<!-- LOCKED OVERLAY -->
 <div class="lock-screen" id="lockScreen">
   <div class="lock-box" id="lockBox">
-    <!-- FL Studio Logo -->
-    <img src="Fl.png" alt="FL Studio Logo" />
+    <img src="Fl.png" alt="FL Studio Logo" class="logo" />
     <h2>FL Studio</h2>
     <input type="password" id="passwordInput" placeholder="Password" autofocus />
     <br />
     <button id="submitBtn">Next</button>
     <div class="error" id="errorMsg">Wrong password</div>
   </div>
+</div>
+
+<!-- UNLOCKED IMAGE SECTION -->
+<div class="unlocked-container" id="unlockedContainer">
+  <img src="unlocked.png" alt="Unlocked Content" />
 </div>
 
 <script>
@@ -118,6 +147,7 @@
   const input = document.getElementById("passwordInput");
   const btn = document.getElementById("submitBtn");
   const errorMsg = document.getElementById("errorMsg");
+  const unlockedContainer = document.getElementById("unlockedContainer");
 
   window.onload = () => input.focus();
 
@@ -127,7 +157,8 @@
       errorMsg.style.display = "none";
       lockScreen.classList.add("hidden");
       setTimeout(() => {
-        window.location.href = "unlocked.png"; // Redirect to image page
+        lockScreen.style.display = "none";
+        unlockedContainer.style.display = "flex";
       }, 600);
     } else {
       errorMsg.style.display = "block";
