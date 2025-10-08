@@ -1,10 +1,9 @@
-<!-- file: locked_screen.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fl Studios</title>
+<title>FL Studio</title>
 <style>
   html, body {
     margin: 0;
@@ -32,7 +31,7 @@
 
   .lock-box {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px); /* ← Glass effect */
+    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 40px 50px;
     border-radius: 12px;
@@ -42,7 +41,6 @@
     transition: transform 0.1s ease;
   }
 
-  /* Shake animation */
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     20%, 60% { transform: translateX(-10px); }
@@ -51,6 +49,18 @@
 
   .shake {
     animation: shake 0.4s;
+  }
+
+  .lock-box img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .lock-box h2 {
+    margin: 5px 0 15px;
+    font-size: 24px;
+    letter-spacing: 1px;
   }
 
   .lock-box input {
@@ -91,7 +101,9 @@
 
 <div class="lock-screen" id="lockScreen">
   <div class="lock-box" id="lockBox">
-    <h2>Enter Password</h2>
+    <!-- FL Studio Logo -->
+    <img src="Fl.png" alt="FL Studio Logo" />
+    <h2>FL Studio</h2>
     <input type="password" id="passwordInput" placeholder="Password" autofocus />
     <br />
     <button id="submitBtn">Next</button>
@@ -115,7 +127,7 @@
       errorMsg.style.display = "none";
       lockScreen.classList.add("hidden");
       setTimeout(() => {
-        window.location.href = "unlocked.png"; // Redirects to image page
+        window.location.href = "unlocked.png"; // Redirect to image page
       }, 600);
     } else {
       errorMsg.style.display = "block";
